@@ -11,7 +11,6 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 app = Flask(__name__)
 
-
 def main(summary, start, end):
     """Creates a Google Calendar event with the given summary."""
     start_datetime = datetime.datetime.strptime(start, '%Y-%m-%dT%H:%M:%SZ')
@@ -67,14 +66,10 @@ def create_event():
     start = request.json.get('start')
     end = request.json.get('end')
 
-    print("-----",start)
+    print("-----", start)
     print("-----", end)
     if summary and start and end:
-        hangout_link, event_id = main(summary,start,end)
+        hangout_link, event_id = main(summary, start, end)
         return jsonify({'hangout_link': hangout_link, 'event_id': event_id}), 200
     else:
         return jsonify({'error': 'Summary is required'}), 400
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5005)
-
