@@ -76,5 +76,6 @@ def create_event():
         return jsonify({'error': 'Summary is required'}), 400
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5005)
+    app.run(debug=False)
+
 
