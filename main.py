@@ -9,7 +9,7 @@ from google.auth.transport.requests import Request
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 
 def main(summary, start, end):
@@ -60,7 +60,7 @@ def main(summary, start, end):
     return event.get('hangoutLink'), event.get('id')
 
 
-@app.route('/create-event', methods=['POST'])
+@application.route('/create-event', methods=['POST'])
 def create_event():
     """Handler for creating a Google Calendar event."""
     summary = request.json.get('summary')
@@ -75,7 +75,12 @@ def create_event():
     else:
         return jsonify({'error': 'Summary is required'}), 400
 
+@application.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+
 if __name__ == '__main__':
-    app.run(debug=False)
+    application.run(debug=False)
 
 
